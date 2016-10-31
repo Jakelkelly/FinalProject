@@ -1,3 +1,18 @@
-table, td{border-style: solid; border-width: thin}
+html {
+    background-image: url("Images/backimage.jpg");
+    font-family: "Comic Sans MS";
+}
 
-img{height: 110px; width:110px}
+body {
+    background-image: url("Images/bodyimage.jpg");  
+    border: solid;
+    border-color: darkgreen;
+}
+
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
