@@ -1,18 +1,27 @@
 html {
-    background-image: url("Images/backimage.jpg");
+    background-image: url("Images/backimage.png");
     font-family: "Impact";
 }
 
+body.Sign{
+    margin-left: 25%;
+    margin-right: 25%;
+
+
+}
 body {
-    margin-left: 400px;
-    margin-right: 400px;
     border: solid;
     background-image: url("Images/bodyimage.jpg");
-    border-color: darkgreen;
+    border-color: purple;
 }
+
 
 table.topbar {
 
     color: black;
     text-underline: none;
+}
+
+header {
+    position:fixed;
 }
