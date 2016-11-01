@@ -36,3 +36,13 @@ h2 {
 p {
     background-color: violet;
 }
+
+div.active {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: violet;
+    background-color: black;
+    border: solid;
+    border-color: purple;
+}

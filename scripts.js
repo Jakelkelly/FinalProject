@@ -63,7 +63,9 @@ function signIn() {
     }
 
     if(TesterUser == usernameLogin && TesterPass == passwordLogin){
-        alert("Login")
+
+        localStorage.setItem("Active", usernameLogin);
+        window.location.href = "Help.html";
 
     } else {
         signInError("Username or Password is Incorrect");
@@ -74,8 +76,27 @@ function signIn() {
 
 }
 
+function ActiveUser() {
 
+    var Active = localStorage.getItem("Active");
+    var ActiveCoins = localStorage.getItem("ActiveCoins");
+    var ActivePoints = localStorage.getItem("ActivePoints");
 
+    if (ActiveCoins == null){
+        ActiveCoins = 0;
+    }
+    if (ActivePoints == null){
+        ActivePoints = 0;
+    }
+    var topBar = Active + ":" + "    Coins:" + ActiveCoins + "    Points:" +ActivePoints;
+
+    document.getElementById("active").innerHTML = topBar;
+}
+
+function SignOut() {
+
+    localStorage.setItem("Active", "Guest Profile");
+}
 
 
 
