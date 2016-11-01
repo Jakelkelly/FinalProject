@@ -6,22 +6,30 @@ html {
 body.Sign{
     margin-left: 25%;
     margin-right: 25%;
-
-
 }
+
+body.Help{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
 body {
     border: solid;
     background-image: url("Images/bodyimage.jpg");
     border-color: purple;
 }
 
-
-table.topbar {
-
-    color: black;
-    text-underline: none;
-}
-
 header {
     position:fixed;
+}
+
+h1 {
+    background-color: violet;
+}
+h2 {
+    background-color: violet;
+}
+p {
+    background-color: violet;
 }
