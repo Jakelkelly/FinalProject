@@ -1,18 +1,18 @@
 html {
     background-image: url("Images/backimage.jpg");
-    font-family: "Comic Sans MS";
+    font-family: "Impact";
 }
 
 body {
-    background-image: url("Images/bodyimage.jpg");  
+    margin-left: 400px;
+    margin-right: 400px;
     border: solid;
+    background-image: url("Images/bodyimage.jpg");
     border-color: darkgreen;
 }
 
+table.topbar {
 
-li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+    color: black;
+    text-underline: none;
 }
