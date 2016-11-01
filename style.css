@@ -3,6 +3,9 @@ html {
     font-family: "Impact";
 }
 
+div.Errors {
+    color: red;
+}
 body.Sign{
     margin-left: 25%;
     margin-right: 25%;
