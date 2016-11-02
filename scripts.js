@@ -1,6 +1,3 @@
-
-
-
 function startUp() {
 
     ActiveUser();
@@ -40,12 +37,18 @@ function signUp() {
         var OK = 0;
     }
 
+    if (createUsername == localStorage.getItem(createUsername)) {
+        signUpError("Username is already in use");
+        var OK = 0;
+    }
+
     if (OK == 1){
 
         var Username = createUsername;
         var Password = createPassword;
+        var RecPassword = "p" + Username;
         localStorage.setItem(Username, Username);
-        localStorage.setItem(Password, Password);
+        localStorage.setItem(RecPassword, Password);
 
         window.location.href = "Sign_In.html";
 
@@ -58,7 +61,7 @@ function signIn() {
     var passwordLogin = document.getElementById("password").value;
 
     var TesterUser = localStorage.getItem(usernameLogin);
-    var TesterPass = localStorage.getItem(passwordLogin);
+    var TesterPass = localStorage.getItem("p" + usernameLogin);
 
     if (usernameLogin == 'Hidden' && passwordLogin == 'Reset') {
 
@@ -79,8 +82,6 @@ function signIn() {
         signInError("Username or Password is Incorrect");
 
     }
-
-
 
 }
 
