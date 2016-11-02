@@ -1,5 +1,13 @@
 
 
+
+function startUp() {
+
+    ActiveUser();
+    TopTable();
+
+}
+
 function signUpError(error) {
 
     var errorMes = "*" +error;
@@ -82,20 +90,41 @@ function ActiveUser() {
     var ActiveCoins = localStorage.getItem("ActiveCoins");
     var ActivePoints = localStorage.getItem("ActivePoints");
 
+
     if (ActiveCoins == null){
         ActiveCoins = 0;
     }
     if (ActivePoints == null){
         ActivePoints = 0;
     }
+    if (Active == null){
+        var topBar = ("<a href='Sign_In.html'> Log In</a>");
+        document.getElementById("active").innerHTML = topBar;
+    }
+    else {
     var topBar = Active + ":" + "    Coins:" + ActiveCoins + "    Points:" +ActivePoints;
 
     document.getElementById("active").innerHTML = topBar;
 }
+}
+
+function TopTable() {
+
+
+    var topTable = ("<table> <tr> <td><a href=Slots.html>Slots</a> </td> <td>•</td>" +
+    " <td> <a href=TicTacToe.html>Tic Tac Toe</a> </td> <td>•</td>" +
+    " <td> <a href=Blackjack.html>BlackJack</a> </td> <td>•</td>" +
+    " <td> <a href=Earn_Points.html>Earn Points</a> </td> <td>•</td>" +
+    " <td><a href=Help.html>Help</a> </td><td></tr> </table> ");
+
+    document.getElementById("topTable").innerHTML = topTable;
+
+}
+
 
 function SignOut() {
 
-    localStorage.setItem("Active", "Guest Profile");
+    localStorage.removeItem("Active");
 }
 
 

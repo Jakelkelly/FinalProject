@@ -15,6 +15,10 @@ body.Help{
     margin-left: 10%;
     margin-right: 10%;
 }
+body.Game{
+    margin-left: 10%;
+    margin-right: 10%;
+}
 
 
 body {
@@ -39,10 +43,18 @@ p {
 
 div.active {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     color: violet;
-    background-color: black;
+    background-color: lightgrey;
     border: solid;
     border-color: purple;
+}
+
+div.topTable {
+    margin: auto;
+    width: 35%;
+    background-image: url("Images/bodyimage.jpg");
+    border-color: purple;
+    text-align: center;
 }
