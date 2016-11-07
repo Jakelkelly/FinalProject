@@ -1,6 +1,6 @@
 function startUp() {
 
-    ActiveUser();
+    ActiveUserBar();
     TopTable();
 
 }
@@ -46,9 +46,14 @@ function signUp() {
 
         var Username = createUsername;
         var Password = createPassword;
-        var RecPassword = "p" + Username;
+        var RecPassword = "a" + Username;
+        var UserCoins = "c" + Username;
+        var UserPoints = "p" + Username;
         localStorage.setItem(Username, Username);
         localStorage.setItem(RecPassword, Password);
+        localStorage.setItem(UserCoins, 3);
+        localStorage.setItem(UserPoints, 0);
+
 
         window.location.href = "Sign_In.html";
 
@@ -60,8 +65,8 @@ function signIn() {
     var usernameLogin = document.getElementById("username").value;
     var passwordLogin = document.getElementById("password").value;
 
-    var TesterUser = localStorage.getItem(usernameLogin);
-    var TesterPass = localStorage.getItem("p" + usernameLogin);
+    var testerUser = localStorage.getItem(usernameLogin);
+    var testerPass = localStorage.getItem("a" + usernameLogin);
 
     if (usernameLogin == 'Hidden' && passwordLogin == 'Reset') {
 
@@ -73,7 +78,7 @@ function signIn() {
         signInError("All Fields Are Not Completed");
     }
 
-    if(TesterUser == usernameLogin && TesterPass == passwordLogin){
+    if(testerUser == usernameLogin && testerPass == passwordLogin){
 
         localStorage.setItem("Active", usernameLogin);
         window.location.href = "Help.html";
@@ -85,11 +90,38 @@ function signIn() {
 
 }
 
-function ActiveUser() {
+function RetActiveUsername() {
+    var ActiveUser = localStorage.getItem("Active");
 
-    var Active = localStorage.getItem("Active");
-    var ActiveCoins = localStorage.getItem("ActiveCoins");
-    var ActivePoints = localStorage.getItem("ActivePoints");
+    return (ActiveUser)
+
+}
+
+function RetActiveCoins() {
+    var ActiveUser = localStorage.getItem("Active");
+    var RetCoins = "c" + ActiveUser;
+    var ActiveCoins = parseFloat(localStorage.getItem(RetCoins));
+
+    return (ActiveCoins)
+
+}
+
+function RetActivePoints() {
+
+    var ActiveUser = localStorage.getItem("Active");
+    var RetPoints = "p" + ActiveUser;
+    var ActivePoints = parseFloat(localStorage.getItem(RetPoints));
+
+    return (ActivePoints)
+
+
+}
+
+function ActiveUserBar() {
+
+    var ActiveUser = RetActiveUsername();
+    var ActiveCoins = RetActiveCoins();
+    var ActivePoints = RetActivePoints();
 
 
     if (ActiveCoins == null){
@@ -98,12 +130,12 @@ function ActiveUser() {
     if (ActivePoints == null){
         ActivePoints = 0;
     }
-    if (Active == null){
+    if (ActiveUser == null){
         var topBar = ("<a href='Sign_In.html'> Log In</a>");
         document.getElementById("active").innerHTML = topBar;
     }
     else {
-    var topBar = Active + ":" + "    Coins:" + ActiveCoins + "    Points:" +ActivePoints;
+    var topBar = ActiveUser + ":" + "    Coins:" + ActiveCoins + "    Points:" +ActivePoints;
 
     document.getElementById("active").innerHTML = topBar;
 }
@@ -122,13 +154,82 @@ function TopTable() {
 
 }
 
-
 function SignOut() {
 
     localStorage.removeItem("Active");
 }
 
+function GiveCoins(coins) {
+
+    var ActiveCoins = RetActiveCoins();
+    var ActiveUser = RetActiveUsername();
+    var newerCoins = ActiveCoins + coins;
+    localStorage.setItem("c" + ActiveUser, newerCoins);
+    startUp()
+}
+function GivePoints(points) {
+
+    var ActivePoints = RetActivePoints();
+    var ActiveUser = RetActiveUsername();
+    var newerPoints = ActivePoints + points;
+    localStorage.setItem("p" + ActiveUser, newerPoints);
+    startUp()
+}
+
+// Tic Tac Toe
 
 
+function TicTacToeError(error) {
+
+    var errorMes = "*" +error;
+    document.getElementById("dispTicTacToeError").innerHTML = errorMes;
+
+}
 
 
+function SelectTic1() {
+    TicTacToe("SelectTic1");
+}
+function SelectTic2() {
+    TicTacToe("SelectTic2");
+}
+function SelectTic3() {
+    TicTacToe("SelectTic3");
+}
+function SelectTic4() {
+    TicTacToe("SelectTic4");
+}
+function SelectTic5() {
+    TicTacToe("SelectTic5");
+}
+function SelectTic6() {
+    TicTacToe("SelectTic6");
+}
+function SelectTic7() {
+    TicTacToe("SelectTic7");
+}
+function SelectTic8() {
+    TicTacToe("SelectTic8");
+}
+function SelectTic9() {
+    TicTacToe("SelectTic9");
+}
+
+function TicTacToe(Selected) {
+
+    document.getElementById("dispTicTacToeError").innerHTML = " ";
+
+    if (document.getElementById(Selected).innerText == "O" || document.getElementById(Selected).innerText == "X") {
+        TicTacToeError("Someone Has Already Played Here");
+    } else {
+        document.getElementById(Selected).innerText = "X";
+        var Selected = Selected
+        TicTacToeBot();
+        TicTacToeCheck();
+    }
+
+}
+
+function TicTacToeCheck() {
+    
+}
