@@ -5,9 +5,9 @@ function startUp() {
 
 }
 
-function RandInt(top, bottom) {
+function RandInt(top) {
 
-    return (Math.floor((Math.random() * top) + bottom));
+    return (Math.floor((Math.random() * top) + 1));
 
 }
 
@@ -228,9 +228,7 @@ function TicTacToe(Selected) {
         TicTacToeError("Someone Has Already Played Here");
     } else {
         document.getElementById(Selected).innerText = "X";
-        var selected = Selected;
         TicTacToeCheckPlayerWin();
-        TicTacToeAI();
     }
 
 }
@@ -272,7 +270,7 @@ function TicTacToeCheckPlayerWin() {
     else if (SelectTic3 == "X" && SelectTic5 == "X" && SelectTic7 == "X") {
         PlayerWin()
     } else {
-        TicTacToeCheckTie();
+        TicTacToeCheckTie(1);
     }
 
 
@@ -292,35 +290,35 @@ function TicTacToeCheckBotWin() {
 
 
     if (SelectTic1 == "O" && SelectTic2 == "O" && SelectTic3 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic4 == "O" && SelectTic5 == "O" && SelectTic6 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic7 == "O" && SelectTic8 == "O" && SelectTic9 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic1 == "O" && SelectTic4 == "O" && SelectTic7 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic2 == "O" && SelectTic5 == "O" && SelectTic8 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic3 == "O" && SelectTic6 == "O" && SelectTic9 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic1 == "O" && SelectTic5 == "O" && SelectTic9 == "O") {
-        BotWin()
+        BotWin();
     }
     else if (SelectTic3 == "O" && SelectTic5 == "O" && SelectTic7 == "O") {
-        BotWin()
+        BotWin();
     } else {
         TicTacToeCheckTie();
     }
 
 }
 
-function TicTacToeCheckTie() {
+function TicTacToeCheckTie(player) {
 
     var SelectTic1 = document.getElementById("SelectTic1").innerText;
     var SelectTic2 = document.getElementById("SelectTic2").innerText;
@@ -336,23 +334,28 @@ function TicTacToeCheckTie() {
     if ((SelectTic1 == "X" || SelectTic1 == "O") && (SelectTic2 == "X" || SelectTic2 == "O") && (SelectTic3 == "X" || SelectTic3 == "O") && (SelectTic4 == "X" || SelectTic4 == "O") && (SelectTic5 == "X" || SelectTic5 == "O") && (SelectTic6 == "X" || SelectTic6 == "O") && (SelectTic7 == "X" || SelectTic7 == "O") && (SelectTic8 == "X" || SelectTic8 == "O") && (SelectTic9 == "X" || SelectTic9 == "O")) {
         TicTacToeError("Tie")
 
+    } else if (player == 1){
+        TicTacToeAI();
     }
 
-        }
+
+}
 
 function PlayerWin(){
-    TicTacToeError("Test");
+    document.getElementById("dispResultsTic").innerHTML = "You Win";
 
 }
 
 function BotWin(){
-    TicTacToeError("Test");
+    document.getElementById("dispResultsTic").innerHTML = "You Lose";
 
 }
 
 function TicTacToeAI() {
-    
-    var selectTic = RandInt(1, 9);
+
+
+
+    var selectTic = RandInt(9);
 
     var SelectTic1 = document.getElementById("SelectTic1").innerText;
     var SelectTic2 = document.getElementById("SelectTic2").innerText;
@@ -363,27 +366,103 @@ function TicTacToeAI() {
     var SelectTic7 = document.getElementById("SelectTic7").innerText;
     var SelectTic8 = document.getElementById("SelectTic8").innerText;
     var SelectTic9 = document.getElementById("SelectTic9").innerText;
-    
-    
-    
-    if (selectTic == 1 && SelectTic1 !== "X") {
-        document.getElementById("SelectTic1").innerText = "O";
-    } else if (selectTic == 2 && SelectTic2 !== "X") {
-        document.getElementById("SelectTic2").innerText = "O";
-    } else if (selectTic == 3 && SelectTic3 !== "X") {
+
+
+    if (SelectTic1 == "X" && SelectTic2 == "X" && (SelectTic3 !== "X" && SelectTic3 !== "O")) {
         document.getElementById("SelectTic3").innerText = "O";
-    } else if (selectTic == 4 && SelectTic4 !== "X") {
-        document.getElementById("SelectTic4").innerText = "O";
-    } else if (selectTic == 5 && SelectTic5 !== "X") {
-        document.getElementById("SelectTic5").innerText = "O";
-    } else if (selectTic == 6 && SelectTic6 !== "X") {
+        TicTacToeCheckBotWin();
+    } else if (SelectTic4 == "X" && SelectTic5 == "X" && (SelectTic6 !== "O" && SelectTic6 !== "X")) {
         document.getElementById("SelectTic6").innerText = "O";
-    } else if (selectTic == 7 && SelectTic7 !== "X") {
-        document.getElementById("SelectTic7").innerText = "O";
-    } else if (selectTic == 8 && SelectTic8 !== "X") {
-        document.getElementById("SelectTic8").innerText = "O";
-    } else if (selectTic == 9 && SelectTic9 !== "X") {
+        TicTacToeCheckBotWin();
+    } else if (SelectTic7 == "X" && SelectTic8 == "X" && (SelectTic9 !== "X" && SelectTic9 !== "O")) {
         document.getElementById("SelectTic9").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic1 == "X" && SelectTic4 == "X" && (SelectTic7 !== "X" && SelectTic7 !== "O")) {
+        document.getElementById("SelectTic7").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic2 == "X" && SelectTic5 == "X" && (SelectTic8 !== "O" && SelectTic8 !== "X")) {
+        document.getElementById("SelectTic8").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic3 == "X" && SelectTic6 == "X" && (SelectTic9 !== "X" && SelectTic9 !== "O")) {
+        document.getElementById("SelectTic9").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic1 == "X" && SelectTic5 == "X" && (SelectTic9 !== "X" && SelectTic9 !== "O")) {
+        document.getElementById("SelectTic9").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic3 == "X" && SelectTic5 == "X" && (SelectTic7 !== "X" && SelectTic7 !== "O")) {
+        document.getElementById("SelectTic7").innerText = "O";
+        TicTacToeCheckBotWin();
+
+    } else if (SelectTic3 == "X" && SelectTic2 == "X" && (SelectTic1 !== "X" && SelectTic1 !== "O")) {
+        document.getElementById("SelectTic1").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic6 == "X" && SelectTic5 == "X" && (SelectTic4 !== "O" && SelectTic4 !== "X")) {
+        document.getElementById("SelectTic4").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic9 == "X" && SelectTic8 == "X" && (SelectTic7 !== "X" && SelectTic7 !== "O")) {
+        document.getElementById("SelectTic7").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic7 == "X" && SelectTic4 == "X" && (SelectTic1 !== "X" && SelectTic1 !== "O")) {
+        document.getElementById("SelectTic1").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic8 == "X" && SelectTic5 == "X" && (SelectTic2 !== "O" && SelectTic2 !== "X")) {
+        document.getElementById("SelectTic2").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic9 == "X" && SelectTic6 == "X" && (SelectTic3 !== "X" && SelectTic3 !== "O")) {
+        document.getElementById("SelectTic3").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic9 == "X" && SelectTic5 == "X" && (SelectTic1 !== "X" && SelectTic1 !== "O")) {
+        document.getElementById("SelectTic1").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic7 == "X" && SelectTic5 == "X" && (SelectTic3 !== "X" && SelectTic3 !== "O")) {
+        document.getElementById("SelectTic3").innerText = "O";
+        TicTacToeCheckBotWin();
+
+    } else if (SelectTic1 == "X" && SelectTic3 == "X" && (SelectTic2 !== "X" && SelectTic2 !== "O")) {
+        document.getElementById("SelectTic2").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic4 == "X" && SelectTic6 == "X" && (SelectTic5 !== "O" && SelectTic5 !== "X")) {
+        document.getElementById("SelectTic5").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic7 == "X" && SelectTic9 == "X" && (SelectTic8 !== "X" && SelectTic8 !== "O")) {
+        document.getElementById("SelectTic8").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic1 == "X" && SelectTic7 == "X" && (SelectTic4 !== "X" && SelectTic4 !== "O")) {
+        document.getElementById("SelectTic4").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic2 == "X" && SelectTic8 == "X" && (SelectTic5 !== "O" && SelectTic5 !== "X")) {
+        document.getElementById("SelectTic5").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic3 == "X" && SelectTic9 == "X" && (SelectTic6 !== "X" && SelectTic6 !== "O")) {
+        document.getElementById("SelectTic6").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic1 == "X" && SelectTic9 == "X" && (SelectTic5 !== "X" && SelectTic5 !== "O")) {
+        document.getElementById("SelectTic5").innerText = "O";
+        TicTacToeCheckBotWin();
+    } else if (SelectTic3 == "X" && SelectTic7 == "X" && (SelectTic5 !== "X" && SelectTic5 !== "O")) {
+        document.getElementById("SelectTic5").innerText = "O";
+        TicTacToeCheckBotWin();
+
+    } else if (selectTic == 1 && SelectTic1 !== "X" && SelectTic1 !== "O") {
+        document.getElementById("SelectTic1").innerText = "O";
+    } else if (selectTic == 2 && SelectTic2 !== "X" && SelectTic2 !== "O") {
+        document.getElementById("SelectTic2").innerText = "O";
+    } else if (selectTic == 3 && SelectTic3 !== "X" && SelectTic3 !== "O") {
+        document.getElementById("SelectTic3").innerText = "O";
+    } else if (selectTic == 4 && SelectTic4 !== "X" && SelectTic4 !== "O") {
+        document.getElementById("SelectTic4").innerText = "O";
+    } else if (selectTic == 5 && SelectTic5 !== "X" && SelectTic5 !== "O") {
+        document.getElementById("SelectTic5").innerText = "O";
+    } else if (selectTic == 6 && SelectTic6 !== "X" && SelectTic6 !== "O") {
+        document.getElementById("SelectTic6").innerText = "O";
+    } else if (selectTic == 7 && SelectTic7 !== "X" && SelectTic7 !== "O") {
+        document.getElementById("SelectTic7").innerText = "O";
+    } else if (selectTic == 8 && SelectTic8 !== "X" && SelectTic8 !== "O") {
+        document.getElementById("SelectTic8").innerText = "O";
+    } else if (selectTic == 9 && SelectTic9 !== "X" && SelectTic9 !== "O") {
+        document.getElementById("SelectTic9").innerText = "O";
+    } else {
+        TicTacToeCheckPlayerWin();
     }
     
 
