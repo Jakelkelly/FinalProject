@@ -69,7 +69,7 @@ p {
 }
 
 .TicButton {
-    background-color: violet;
+    background-color: grey;
     border: ridge;
     border-color: purple;
     height:100px;
@@ -79,3 +79,17 @@ p {
     display: inline-block;
     font-size: 16px;
 }
+
+.TicPlayButton {
+    font-family: "Impact";
+    background-color: violet;
+    border: ridge;
+    border-color: purple;
+    height:75px;
+    width:310px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
