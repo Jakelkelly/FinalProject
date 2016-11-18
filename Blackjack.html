@@ -7,8 +7,46 @@
     <title>BlackJack</title>
 </head>
 <body class="Game" onload="startUp();">
-   <div id="topTable" class="topTable"></div>
-   <div id="active" class="active"></div>
+<div id="topTable" class="topTable"></div>
+<div id="active" class="active"></div>
+
+<h1>Blackjack</h1>
+<br>
+<br>
+<table id="BlackjackCards">
+    <tr><td>
+        <div id="BlackjackDealer" class="BlackjackDealer"></div>
+    </td></tr>
+    <tr><td>
+        <div id="BlackjackPlayer" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer2" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer3" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer4" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer5" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer6" class="BlackjackPlayer"></div>
+    </td><td>
+        <div id="BlackjackPlayer7" class="BlackjackPlayer"></div>
+    </td></tr>
+</table>
+
+<table>
+    <tr><td>
+        <button id="BlackjackStayButton" class="BlackjackHitStay" onclick="Blackjack(Stay)" disabled>Stay</button>
+        </td><td>
+        <button id="BlackjackHitButton" class="BlackjackHitStay" onclick="Blackjack(Hit)" disabled>Hit</button>
+    </td></tr>
+</table>
+
+<div id="dispBlackjackError" class="Errors"></div>
+
+<button id="BlackjackPlayButton" class="BlackjackButton" onclick="BlackjackPlayButton()">Play<br> Cost 5 Coin</button>
+
+
 
 </body>
 </html>
