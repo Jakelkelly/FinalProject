@@ -622,8 +622,8 @@ function Blackjack(hitOrStay) {
 
     if (hitOrStay == "Start") {
 
-        var dealerCard1 = RandInt(1, 1);
-        var dealerCard2 = RandInt(1, 1);
+        var dealerCard1 = RandInt(1, 52);
+        var dealerCard2 = RandInt(1, 52);
         var dealerCard3 = RandInt(1, 52);
         var dealerCard4 = RandInt(1, 52);
         var dealerCard5 = RandInt(1, 52);
@@ -651,8 +651,8 @@ function Blackjack(hitOrStay) {
             dealerCard7 = RandInt(1, 52);
         }
 
-        var playerCard1 = RandInt(1, 1);
-        var playerCard2 = RandInt(1, 1);
+        var playerCard1 = RandInt(1, 52);
+        var playerCard2 = RandInt(1, 52);
         var playerCard3 = RandInt(1, 52);
         var playerCard4 = RandInt(1, 52);
         var playerCard5 = RandInt(1, 52);
@@ -679,7 +679,7 @@ function Blackjack(hitOrStay) {
         while (playerCard7 == playerCard2 || playerCard7 == playerCard3 || playerCard7 == playerCard4 || playerCard7 == playerCard5 || playerCard7 == playerCard6 || playerCard7 == playerCard1 || playerCard7 == dealerCard1 || playerCard7 == dealerCard2 || playerCard7 == dealerCard3 || playerCard7 == dealerCard4 || playerCard7 == dealerCard5 || playerCard7 == dealerCard6 || playerCard7 == dealerCard7) {
             playerCard7 = RandInt(1, 52);
         }
-        
+
         var blackjackPlayerValue = BlackjackCardID(playerCard1, "BlackjackPlayer");
         var tempPlayerValue = BlackjackCardID(playerCard2, "BlackjackPlayer");
 
@@ -692,7 +692,8 @@ function Blackjack(hitOrStay) {
         sessionStorage.setItem("dealerCard5", dealerCard5);
         sessionStorage.setItem("dealerCard6", dealerCard6);
         sessionStorage.setItem("dealerCard7", dealerCard7);
-        
+
+
         sessionStorage.setItem("playerCard3", playerCard3);
         sessionStorage.setItem("playerCard4", playerCard4);
         sessionStorage.setItem("playerCard5", playerCard5);
@@ -700,6 +701,7 @@ function Blackjack(hitOrStay) {
         sessionStorage.setItem("playerCard7", playerCard7);
         sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
         sessionStorage.setItem("hits", 0);
+        sessionStorage.setItem("DealerCardCount", 2)
     }
     else if (hitOrStay == "Hit") {
 
@@ -721,84 +723,234 @@ function Blackjack(hitOrStay) {
 
         if (hits == 0) {
 
-        var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
+            var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
             var tempPlayerValue = BlackjackCardID(playerCard3, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
+            blackjackPlayerValue = blackjackPlayerValue + tempPlayerValue;
             sessionStorage.setItem("hits", 1);
             sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else {
+                BlackjackDealerHitOrStay(0);
+            }
         } else if (hits == 1) {
 
             var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
             var tempPlayerValue = BlackjackCardID(playerCard4, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
+            blackjackPlayerValue = blackjackPlayerValue + tempPlayerValue;
             sessionStorage.setItem("hits", 2);
             sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else {
+                BlackjackDealerHitOrStay(1);
+            }
         } else if (hits == 2) {
 
             var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
-            var tempPlayerValue = BlackjackCardID(playerCard4, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
+            var tempPlayerValue = BlackjackCardID(playerCard5, "BlackjackPlayer");
+            blackjackPlayerValue = blackjackPlayerValue + tempPlayerValue;
             sessionStorage.setItem("hits", 3);
             sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            }
+            else {
+                BlackjackDealerHitOrStay(2);
+            }
         } else if (hits == 3) {
 
             var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
-            var tempPlayerValue = BlackjackCardID(playerCard5, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
+            var tempPlayerValue = BlackjackCardID(playerCard6, "BlackjackPlayer");
+            blackjackPlayerValue = blackjackPlayerValue + tempPlayerValue;
             sessionStorage.setItem("hits", 4);
             sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else {
+                BlackjackDealerHitOrStay(3);
+            }
         } else if (hits == 4) {
 
             var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
-            var tempPlayerValue = BlackjackCardID(playerCard6, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
+            var tempPlayerValue = BlackjackCardID(playerCard7, "BlackjackPlayer");
+            blackjackPlayerValue = blackjackPlayerValue + tempPlayerValue;
             sessionStorage.setItem("hits", 5);
             sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
-        } else if (hits == 5) {
-
-            var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
-
-            var tempPlayerValue = BlackjackCardID(playerCard7, "BlackjackPlayer");
-            blackjackPlayerValue + tempPlayerValue;
-            sessionStorage.setItem("hits", 6);
-            sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else {
+                BlackjackDealerHitOrStay(4);
+            }
+        } else {
+            BlackjackError("Hit too many Times");
+            BlackjackCheck();
         }
 
+    } else if (hitOrStay == "Stay") {
+        BlackjackDealerHitOrStay("not");
+        BlackjackShowHand();
+        BlackjackCheck();
     }
 
 }
 
+function BlackjackCheck() {
+
+    var blackjackDealerValue = parseFloat(sessionStorage.getItem("blackjackDealerValue"));
+    var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue"));
+
+            if (blackjackPlayerValue > 21) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else if (blackjackDealerValue > 21) {
+                BlackjackPlayerWin();
+                BlackjackShowHand();
+            } else if (blackjackPlayerValue > blackjackDealerValue) {
+                BlackjackPlayerWin();
+                BlackjackShowHand();
+            } else if (blackjackPlayerValue < blackjackDealerValue) {
+                BlackjackPlayerLose();
+                BlackjackShowHand();
+            } else if (blackjackPlayerValue == blackjackDealerValue) {
+                BlackjackPlayerTie();
+                BlackjackShowHand();
+            } else {
+                BlackjackPlayerTie();
+                BlackjackShowHand();
+            }
 
 
+}
+
+function BlackjackShowHand() {
+
+    var dealerCount = parseFloat(sessionStorage.getItem("DealerCardCount"));
+    var div = document.getElementById('BlackjackDealer');
+    while(div.firstChild){
+        div.removeChild(div.firstChild);
+    }
+
+    if (dealerCount >= 1) {
+        var dealerCard1 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard1")), "BlackjackDealer");
+    }
+    if (dealerCount >= 2) {
+        var dealerCard2 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard2")), "BlackjackDealer");
+    }
+    if (dealerCount >= 3) {
+        var dealerCard3 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard3")), "BlackjackDealer");
+    }
+    if (dealerCount >= 4) {
+        var dealerCard4 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard4")), "BlackjackDealer");
+    }
+    if (dealerCount >= 5) {
+        var dealerCard5 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard5")), "BlackjackDealer");
+    }
+    if (dealerCount >= 6) {
+        var dealerCard6 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard6")), "BlackjackDealer");
+    }
+    if (dealerCount >= 7) {
+        var dealerCard7 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard7")), "BlackjackDealer");
+    }
 
 
+}
+
+function BlackjackPlayerLose() {
+    document.getElementById("dispResultsBlackjack").innerHTML = "You lose";
+    document.getElementById("BlackjackHitButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").disabled = true;
+    document.getElementById("BlackjackHitButton").disabled = true;
+}
+function BlackjackPlayerTie() {
+    document.getElementById("dispResultsBlackjack").innerHTML = "You Tied";
+    document.getElementById("BlackjackHitButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").disabled = true;
+    document.getElementById("BlackjackHitButton").disabled = true;
+}
+function BlackjackPlayerWin() {
+    document.getElementById("dispResultsBlackjack").innerHTML = "You Win! 15 Points Awarded";
+    document.getElementById("BlackjackHitButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").style.background = 'lightslategrey';
+    document.getElementById("BlackjackStayButton").disabled = true;
+    document.getElementById("BlackjackHitButton").disabled = true;
+    GivePoints(15);
+}
+
+function BlackjackDealerHitOrStay(number) {
+    var dealerCard1 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard1")), "NA");
+    var dealerCard2 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard2")), "NA");
+    var dealerCard3 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard3")), "NA");
+    var dealerCard4 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard4")), "NA");
+    var dealerCard5 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard5")), "NA");
+    var dealerCard6 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard6")), "NA");
+    var dealerCard7 = BlackjackCardID(parseFloat(sessionStorage.getItem("dealerCard7")), "NA");
+
+    var hits = parseFloat(sessionStorage.getItem("hits"));
+
+    var blackjackDealerValue1 = dealerCard1 + dealerCard2;
+    var blackjackDealerValue2 = blackjackDealerValue1 + dealerCard3;
+    var blackjackDealerValue3 = blackjackDealerValue2 + dealerCard4;
+    var blackjackDealerValue4 = blackjackDealerValue3 + dealerCard5;
+    var blackjackDealerValue5 = blackjackDealerValue4 + dealerCard6;
+    var blackjackDealerValue6 = blackjackDealerValue5 + dealerCard7;
 
 
+    if (number == "not") {
 
+        if (blackjackDealerValue4 <= 17) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 5);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue4);
+        } else if (blackjackDealerValue3 <= 17) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue3);
+            sessionStorage.setItem("DealerCardCount", 4);
+        } else if (blackjackDealerValue2 <= 17) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 3);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue2);
+        } else if (blackjackDealerValue1 <= 17) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 2);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue1);
+        } else {
+            BlackjackPlayerWin();
+        }
+    }else {
+        if (blackjackDealerValue1 <= 17 && hits == 0) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 2);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue1);
+        } else if (blackjackDealerValue2 <= 17 && hits == 1) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue2);
+            sessionStorage.setItem("DealerCardCount", 3);
+        } else if (blackjackDealerValue3 <= 17 && hits == 2) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 4);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue3);
+        } else if (blackjackDealerValue4 <= 17 && hits == 3) {
+            BlackjackDealerCardImg(1);
+            sessionStorage.setItem("DealerCardCount", 5);
+            sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue4);
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function BlackjackCardID(card, output){
+function BlackjackCardID(card, output) {
 
     if (card == 2) {
 
@@ -806,9 +958,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c02.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 2;
+        }var cardValue = 2;
 
         return cardValue;
     }
@@ -818,9 +972,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c03.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 3;
+        }var cardValue = 3;
 
         return cardValue;
     }
@@ -830,160 +986,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c04.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 4;
-
-        return cardValue;
-    
-    }
-    else if (card == 5) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c05.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 5;
-
-        return cardValue;
-
-    }
-    else if (card == 6) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c06.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 6;
-
-        return cardValue;
-
-    }
-    else if (card == 7) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c07.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 7;
-
-        return cardValue;
-
-    }
-    else if (card == 8) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c08.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 8;
-
-        return cardValue;
-
-    }
-    else if (card == 9) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c09.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 9;
-
-        return cardValue;
-
-    }
-    else if (card == 10) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c10.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
-
-        return cardValue;
-
-    }
-    else if (card == 11) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c11.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
-
-        return cardValue;
-    }
-     else if (card == 12) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c12.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
-
-        return cardValue;
-    }
-    else if (card == 13) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c13.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
-
-        return cardValue;
-    }
-    else if (card == 2) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c02.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 2;
-
-        return cardValue;
-    }
-    else if (card == 3) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c03.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 3;
-
-        return cardValue;
-    }
-    else if (card == 4) {
-
-        var playerImg = document.createElement("img");
-        playerImg.src = 'Images/c04.bmp';
-        playerImg.setAttribute("height", "100");
-        playerImg.setAttribute("width", "75");
-
-        document.getElementById(output).appendChild(playerImg);
-        var cardValue = 4;
+        }var cardValue = 4;
 
         return cardValue;
 
@@ -994,9 +1001,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c05.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 5;
+        }var cardValue = 5;
 
         return cardValue;
 
@@ -1007,9 +1016,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c06.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 6;
+        }var cardValue = 6;
 
         return cardValue;
 
@@ -1020,9 +1031,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c07.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 7;
+        }var cardValue = 7;
 
         return cardValue;
 
@@ -1033,9 +1046,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c08.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 8;
+        }var cardValue = 8;
 
         return cardValue;
 
@@ -1046,9 +1061,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c09.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 9;
+        }var cardValue = 9;
 
         return cardValue;
 
@@ -1059,9 +1076,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c10.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
 
@@ -1072,9 +1091,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c11.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1084,9 +1105,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c12.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1096,22 +1119,201 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/c13.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
-        //D
+    else if (card == 2) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c02.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 2;
+
+        return cardValue;
+    }
+    else if (card == 3) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c03.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 3;
+
+        return cardValue;
+    }
+    else if (card == 4) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c04.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 4;
+
+        return cardValue;
+
+    }
+    else if (card == 5) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c05.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 5;
+
+        return cardValue;
+
+    }
+    else if (card == 6) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c06.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 6;
+
+        return cardValue;
+
+    }
+    else if (card == 7) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c07.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 7;
+
+        return cardValue;
+
+    }
+    else if (card == 8) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c08.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 8;
+
+        return cardValue;
+
+    }
+    else if (card == 9) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c09.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 9;
+
+        return cardValue;
+
+    }
+    else if (card == 10) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c10.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 10;
+
+        return cardValue;
+
+    }
+    else if (card == 11) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c11.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 10;
+
+        return cardValue;
+    }
+    else if (card == 12) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c12.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 10;
+
+        return cardValue;
+    }
+    else if (card == 13) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c13.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+        document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 10;
+
+        return cardValue;
+    }
+    //D
     else if (card == 15) {
 
         var playerImg = document.createElement("img");
         playerImg.src = 'Images/d02.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 2;
+        }var cardValue = 2;
 
         return cardValue;
     }
@@ -1121,9 +1323,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d03.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 3;
+        }var cardValue = 3;
 
         return cardValue;
     }
@@ -1133,9 +1337,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d04.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 4;
+        }var cardValue = 4;
 
         return cardValue;
 
@@ -1146,9 +1352,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d05.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 5;
+        }var cardValue = 5;
 
         return cardValue;
 
@@ -1159,9 +1367,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d06.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 6;
+        }var cardValue = 6;
 
         return cardValue;
 
@@ -1172,9 +1382,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d07.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 7;
+        }var cardValue = 7;
 
         return cardValue;
 
@@ -1185,9 +1397,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d08.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 8;
+        }var cardValue = 8;
 
         return cardValue;
 
@@ -1198,9 +1412,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d09.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 9;
+        }var cardValue = 9;
 
         return cardValue;
 
@@ -1211,9 +1427,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d10.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
 
@@ -1224,9 +1442,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d11.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1236,9 +1456,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d12.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1248,22 +1470,26 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/d13.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
-        //H
+    //H
     else if (card == 28) {
 
         var playerImg = document.createElement("img");
         playerImg.src = 'Images/h02.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 2;
+        }var cardValue = 2;
 
         return cardValue;
     }
@@ -1273,9 +1499,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h03.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 3;
+        }var cardValue = 3;
 
         return cardValue;
     }
@@ -1285,9 +1513,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h04.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 4;
+        }var cardValue = 4;
 
         return cardValue;
 
@@ -1298,9 +1528,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h05.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 5;
+        }var cardValue = 5;
 
         return cardValue;
 
@@ -1311,9 +1543,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h06.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 6;
+        }var cardValue = 6;
 
         return cardValue;
 
@@ -1324,9 +1558,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h07.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 7;
+        }var cardValue = 7;
 
         return cardValue;
 
@@ -1337,9 +1573,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h08.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 8;
+        }var cardValue = 8;
 
         return cardValue;
 
@@ -1350,9 +1588,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h09.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 9;
+        }var cardValue = 9;
 
         return cardValue;
 
@@ -1363,9 +1603,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h10.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
 
@@ -1376,9 +1618,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h11.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1388,9 +1632,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h12.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1400,22 +1646,26 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/h13.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
-        //S
+    //S
     else if (card == 41) {
 
         var playerImg = document.createElement("img");
         playerImg.src = 'Images/s02.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 2;
+        }var cardValue = 2;
 
         return cardValue;
     }
@@ -1425,9 +1675,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s03.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 3;
+        }var cardValue = 3;
 
         return cardValue;
     }
@@ -1437,9 +1689,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s04.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 4;
+        }var cardValue = 4;
 
         return cardValue;
 
@@ -1450,9 +1704,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s05.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 5;
+        }var cardValue = 5;
 
         return cardValue;
 
@@ -1463,9 +1719,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s06.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 6;
+        }var cardValue = 6;
 
         return cardValue;
 
@@ -1476,9 +1734,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s07.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 7;
+        }var cardValue = 7;
 
         return cardValue;
 
@@ -1489,9 +1749,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s08.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 8;
+        }var cardValue = 8;
 
         return cardValue;
 
@@ -1502,9 +1764,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s09.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 9;
+        }var cardValue = 9;
 
         return cardValue;
 
@@ -1515,9 +1779,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s10.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
 
@@ -1528,9 +1794,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s11.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1540,9 +1808,11 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s12.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
@@ -1552,12 +1822,71 @@ function BlackjackCardID(card, output){
         playerImg.src = 'Images/s13.bmp';
         playerImg.setAttribute("height", "100");
         playerImg.setAttribute("width", "75");
-
+        if (output == "NA") {
+            //NA
+        } else {
         document.getElementById(output).appendChild(playerImg);
-        var cardValue = 10;
+        }var cardValue = 10;
 
         return cardValue;
     }
+    //A
+    else if (card == 1) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/c01.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 11;
+
+        return cardValue;
+    }
+    else if (card == 14) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/d01.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 11;
+
+        return cardValue;
+    }
+    else if (card == 27) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/h01.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 11;
+
+        return cardValue;
+    } else if (card == 40) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/s01.bmp';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "75");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+        }var cardValue = 11;
+
+        return cardValue;
+    }
+
 
 }
 
