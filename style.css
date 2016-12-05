@@ -132,3 +132,27 @@ p {
     font-size: 16px;
 }
 
+.Slots {
+    background-color: lightslategrey;
+    border: ridge;
+    border-color: purple;
+    height:100px;
+    width:100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.SlotsButton {
+    font-family: "Impact";
+    background-color: violet;
+    border: ridge;
+    border-color: purple;
+    height:75px;
+    width:311px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

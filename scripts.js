@@ -1890,3 +1890,137 @@ function BlackjackCardID(card, output) {
 
 }
 
+//Slots  http://vegasclick.com/games/slots/how-they-work
+
+
+function SlotsPlayButton() {
+
+
+    var activeCoins = RetActiveCoins();
+    if (activeCoins <= 0) {
+        SlotsError("You have Insufficient Coins")
+    } else if (RetActiveUsername() == null) {
+        SlotsError("You need to sign in before you can play")
+    } else if (document.getElementById("SlotsPlayButton").innerHTML !== "Reset") {
+
+        GiveCoins(-1);
+
+        SlotsStart();
+        document.getElementById("SlotsPlayButton").innerHTML = "Reset";
+    } else {
+
+        window.location.href = "Slots.html";
+
+    }
+}
+
+
+function SlotsError(error) {
+
+    var errorMes = "*" +error;
+    document.getElementById("dispSlotsError").innerHTML = errorMes;
+
+}
+
+function SlotsStart() {
+
+    var Slot1 = RandInt(1,128);
+    var Slot2 = RandInt(1,128);
+    var Slot3 = RandInt(1,128);
+    SlotsID(128, "Slot1");
+
+}
+
+function SlotsID(number, output) {
+
+    if (number <= 73) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/SBlank.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Blank";
+        }
+    } else if (number >= 74 && number <= 78) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/SCherry.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Cherry";
+        }
+    } else if (number >= 79 && number <= 94) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/S1Bar.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Bar";
+        }
+
+    } else if (number >= 95 && number <= 107) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/S2Bar.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Double Bar";
+        }
+
+    } else if (number >= 108 && number <= 118) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/S3Bar.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Triple Bar";
+        }
+
+    } else if (number >= 119 && number <= 126) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/SSeven.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Seven";
+        }
+
+    } else if (number >= 127 && number <= 128) {
+
+        var playerImg = document.createElement("img");
+        playerImg.src = 'Images/SJackpot.png';
+        playerImg.setAttribute("height", "100");
+        playerImg.setAttribute("width", "100");
+        if (output == "NA") {
+            //NA
+        } else {
+            document.getElementById(output).appendChild(playerImg);
+            return "Jackpot";
+        }
+
+    }
+}
