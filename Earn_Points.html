@@ -19,5 +19,50 @@
 <input type="button" onclick="GivePoints(-10)" value="Temp Points - 10">
 
 
+<h2>Earn Points</h2>
+
+<table>
+    <tr><td><div id = "div1"></div></td>    <td><input type = "text" id = "txt1"></td></tr>
+    <tr><td><div id = "div2"></div></td>    <td><input type = "text" id = "txt2"></td></tr>
+    <tr><td><div id = "div3"></div></td>    <td><input type = "text" id = "txt3"></td></tr>
+    <tr><td><div id = "div4"></div></td>    <td><input type = "text" id = "txt4"></td></tr>
+    <tr><td><div id = "div5"></div></td>    <td><input type = "text" id = "txt5"></td></tr>
+    <tr><td><div id = "div6"></div></td>    <td><input type = "text" id = "txt6"></td></tr>
+    <tr><td><div id = "div7"></div></td>    <td><input type = "text" id = "txt7"></td></tr>
+    <tr><td><div id = "div8"></div></td>    <td><input type = "text" id = "txt8"></td></tr>
+    <tr><td><div id = "div9"></div></td>    <td><input type = "text" id = "txt9"></td></tr>
+    <tr><td><div id = "div10"></div></td>    <td><input type = "text" id = "txt10"></td></tr>
+</table>
+<button id="EarnDone" class="EarnAccept" onclick="EarnScore()">Score</button>
+<table>
+    <tr>
+        <td>
+            <button id="EarnButton1" class="EarnButton" onclick="AddCreateQuiz()">Addition</button>
+        </td>
+        <td>
+            <button id="EarnButton2" class="EarnButton" onclick="SelectTic5()"></button>
+        </td>
+        <td>
+            <button id="EarnButton3" class="EarnButton" onclick="SelectTic6()"></button>
+        </td>
+        <td>
+            <div id="dispEarn"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="EarnButton4" class="EarnButton" onclick="SelectTic4()"></button>
+        </td>
+        <td>
+            <button id="EarnButton5" class="EarnButton" onclick="SelectTic5()"></button>
+        </td>
+        <td>
+            <button id="EarnButton6" class="EarnButton" onclick="StatesCreateQuiz()">States Quiz</button>
+        </td>
+        <td>
+            <div id="dispEarnError" class="Errors"></div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

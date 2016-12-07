@@ -1922,12 +1922,73 @@ function SlotsError(error) {
 
 }
 
+function SlotsEffects(output) {
+    var num = RandInt(1,2);
+    if (num == 1) {
+        document.getElementById("Test").src="Images/SCherry.png";
+    } if (num == 2) {
+        document.getElementById("Test").src="Images/SSeven.png";
+    }
+
+
+}
+
 function SlotsStart() {
 
     var Slot1 = RandInt(1,128);
     var Slot2 = RandInt(1,128);
     var Slot3 = RandInt(1,128);
-    SlotsID(128, "Slot1");
+    ///var int = setInterval("SlotsEffects('Slot1')",500);
+    var slot1 = SlotsID(Slot1, "Slot1");
+    var slot2 = SlotsID(Slot2, "Slot2");
+    var slot3 = SlotsID(Slot3, "Slot3");
+    var slot1b = slot1.search('Bar');
+    var slot2b = slot2.search('Bar');
+    var slot3b = slot3.search('Bar');
+
+if (slot1 == "Jackpot" && slot2 == "Jackpot" && slot3 == "Jackpot"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 1666 Points Awarded";
+    GivePoints(1666);
+} else if (slot1 == "Seven" && slot2 == "Seven" && slot3 == "Seven"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 300 Points Awarded";
+    GivePoints(300);
+} else if (slot1 == "Triple Bar" && slot2 == "Triple Bar" && slot3 == "Triple Bar"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 100 Points Awarded";
+    GivePoints(100);
+} else if (slot1 == "Double Bar" && slot2 == "Double Bar" && slot3 == "Double Bar"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 50 Points Awarded";
+    GivePoints(50);
+} else if (slot1 == "Bar" && slot2 == "Bar" && slot3 == "Bar"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 25 Points Awarded";
+    GivePoints(25);
+} else if (slot1 == "Bar" && slot2 == "Bar" && slot3 == "Bar"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 25 Points Awarded";
+    GivePoints(25);
+} else if (slot1b > -1 && slot2b > -1 && slot3b > -1){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 12 Points Awarded";
+    GivePoints(12);
+} else if (slot1 == "Cherry" && slot2 == "Cherry" && slot3 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 12 Points Awarded";
+    GivePoints(12);
+} else if (slot1 == "Cherry" && slot2 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 6 Points Awarded";
+    GivePoints(6);
+} else if (slot1 == "Cherry" && slot3 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 6 Points Awarded";
+    GivePoints(6);
+} else if (slot3 == "Cherry" && slot2 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 6 Points Awarded";
+    GivePoints(6);
+} else if (slot1 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 3 Points Awarded";
+    GivePoints(6);
+} else if (slot2 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 3 Points Awarded";
+    GivePoints(6);
+} else if (slot3 == "Cherry"){
+    document.getElementById("dispResultsSlots").innerHTML = "You Win! 3 Points Awarded";
+    GivePoints(6);
+}
 
 }
 
@@ -2023,4 +2084,339 @@ function SlotsID(number, output) {
         }
 
     }
+}
+
+//States Quiz
+
+function EarnScore() {
+
+    var earn = sessionStorage.getItem("Earn");
+
+    if (earn == "NA"){
+        EarnError("Select a problem");
+    } else if (earn == "State"){
+        StatesScoreQuiz();
+    }
+
+
+
+
+}
+
+function EarnError(error) {
+
+    var errorMes = "*" +error;
+    document.getElementById("dispEarnError").innerHTML = errorMes;
+
+}
+
+
+var ABBREVIATIONS = ["AL",
+    "AK",
+    "AS",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "DC",
+    "FM",
+    "FL",
+    "GA",
+    "GU",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MH",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "MP",
+    "OH",
+    "OK",
+    "OR",
+    "PW",
+    "PA",
+    "PR",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VI",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
+];
+
+var STATES = ["Alabama",
+    "Alaska",
+    "American Samoa",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District Of Columbia",
+    "Federated States Of Micronesia",
+    "Florida",
+    "Georgia",
+    "Guam",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Marshall Islands",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Northern Mariana Islands",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Palau",
+    "Pennsylvania",
+    "Puerto Rico",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virgin Islands",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming"
+];
+var STATES_QUIZ = [];
+var CORRECT_ANSWERS = [];
+var ENTERED_ANSWERS = [];
+
+
+function RandomOneOf(list) {
+    return list[RandomInt(0, list.length-1)];
+}
+
+function RandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function StatesCreateQuiz() {
+
+    document.getElementById("dispEarnError").innerHTML = "";
+    document.getElementById("dispEarn").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "State");
+
+    for (i = 0; i < 20; i++){
+        STATES_QUIZ.pop;
+        CORRECT_ANSWERS.pop;
+        ENTERED_ANSWERS.pop;
+    }
+
+    var count = 0;
+
+    while (count != 10){
+
+        var stateName = RandomOneOf(STATES);
+        var index = STATES.indexOf(stateName);
+        if (index !== stateName){
+            STATES_QUIZ.push(stateName);
+            CORRECT_ANSWERS.push(ABBREVIATIONS[STATES.indexOf(stateName)]);
+            count++;
+        }
+
+    }
+    document.getElementById("div1").innerHTML = STATES_QUIZ[0];
+    document.getElementById("div2").innerHTML = STATES_QUIZ[1];
+    document.getElementById("div3").innerHTML = STATES_QUIZ[2];
+    document.getElementById("div4").innerHTML = STATES_QUIZ[3];
+    document.getElementById("div5").innerHTML = STATES_QUIZ[4];
+    document.getElementById("div6").innerHTML = STATES_QUIZ[5];
+    document.getElementById("div7").innerHTML = STATES_QUIZ[6];
+    document.getElementById("div8").innerHTML = STATES_QUIZ[7];
+    document.getElementById("div9").innerHTML = STATES_QUIZ[8];
+    document.getElementById("div10").innerHTML = STATES_QUIZ[9];
+
+}
+
+
+function StatesScoreQuiz() {
+
+    for (i = 0; i < 10; i++){
+        ENTERED_ANSWERS.pop();
+    }
+    ENTERED_ANSWERS.push(document.getElementById("txt1").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt2").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt3").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt4").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt5").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt6").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt7").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt8").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt9").value);
+    ENTERED_ANSWERS.push(document.getElementById("txt10").value);
+
+    var correct = 0;
+
+    for (i = 0; i < 10; i++){
+
+        if(CORRECT_ANSWERS[i] == ENTERED_ANSWERS[i].toUpperCase()){
+            correct++
+        }
+
+    }
+
+    document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+    GiveCoins(correct);
+
+    document.getElementById("txt1").value = "";
+    document.getElementById("txt2").value = "";
+    document.getElementById("txt3").value = "";
+    document.getElementById("txt4").value = "";
+    document.getElementById("txt5").value = "";
+    document.getElementById("txt6").value = "";
+    document.getElementById("txt7").value = "";
+    document.getElementById("txt8").value = "";
+    document.getElementById("txt9").value = "";
+    document.getElementById("txt10").value = "";
+
+    document.getElementById("div1").innerHTML = "";
+    document.getElementById("div2").innerHTML = "";
+    document.getElementById("div3").innerHTML = "";
+    document.getElementById("div4").innerHTML = "";
+    document.getElementById("div5").innerHTML = "";
+    document.getElementById("div6").innerHTML = "";
+    document.getElementById("div7").innerHTML = "";
+    document.getElementById("div8").innerHTML = "";
+    document.getElementById("div9").innerHTML = "";
+    document.getElementById("div10").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "NA");
+
+}
+
+//Addition
+
+
+var ADDITION_PROBLEMS = [];
+
+function AddCreateQuiz() {
+
+    document.getElementById("dispEarnError").innerHTML = "";
+    document.getElementById("dispEarn").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "Add");
+
+    for (i = 0; i < 20; i++) {
+        ADDITION_PROBLEMS.pop();
+    }
+
+    var Add1 = RandInt(0,100);
+    var Add2 = RandInt(0,100);
+    var Add3 = RandInt(0,100);
+    var Add4 = RandInt(0,100);
+    var Add5 = RandInt(0,100);
+    var Add6 = RandInt(0,100);
+    var Add7 = RandInt(0,100);
+    var Add8 = RandInt(0,100);
+    var Add9 = RandInt(0,100);
+    var Add10 = RandInt(0,100);
+    var Add11 = RandInt(0,100);
+    var Add12 = RandInt(0,100);
+    var Add13 = RandInt(0,100);
+    var Add14 = RandInt(0,100);
+    var Add15 = RandInt(0,100);
+    var Add16 = RandInt(0,100);
+    var Add17 = RandInt(0,100);
+    var Add18 = RandInt(0,100);
+    var Add19 = RandInt(0,100);
+    var Add20 = RandInt(0,100);
+
+    ADDITION_PROBLEMS = [Add1, Add2, Add3, Add4, Add5, Add6, Add7, Add8, Add9, Add10, Add11, Add12, Add13, Add14, Add15, Add16, Add17, Add18, Add19, Add20];
+
+    document.getElementById("div1").innerHTML = Add1 +" + "+Add2;
+    document.getElementById("div2").innerHTML = Add3+" + "+Add4;
+    document.getElementById("div3").innerHTML = Add5 +" + "+Add6;
+    document.getElementById("div4").innerHTML = Add7 +" + "+Add8;
+    document.getElementById("div5").innerHTML = Add9 +" + "+Add10;
+    document.getElementById("div6").innerHTML = Add11 +" + "+Add12;
+    document.getElementById("div7").innerHTML = Add13 +" + "+Add14;
+    document.getElementById("div8").innerHTML = Add15 +" + "+Add16;
+    document.getElementById("div9").innerHTML = Add17 +" + "+Add18;
+    document.getElementById("div10").innerHTML = Add19 +" + "+Add20;
+}
+
+
+function AdditionScoreQuiz() {
+
+    var Ans1 = 0;
+    var Ans2 = 0;
+    var Ans3 = 0;
+    var Ans4 = 0;
+    var Ans5 = 0;
+    var Ans6 = 0;
+    var Ans7 = 0;
+    var Ans8 = 0;
+    var Ans9 = 0;
+    var Ans10 = 0;
+
+    document.getElementById("txt1").value = Ans1;
+    document.getElementById("txt2").value = Ans1;
+    document.getElementById("txt3").value = Ans1;
+    document.getElementById("txt4").value = Ans1;
+    document.getElementById("txt5").value = Ans1;
+    document.getElementById("txt6").value = Ans1;
+    document.getElementById("txt7").value = Ans1;
+    document.getElementById("txt8").value = Ans1;
+    document.getElementById("txt9").value = Ans1;
+    document.getElementById("txt10").value = Ans1;
+
+
+
+
 }
