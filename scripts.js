@@ -153,7 +153,7 @@ function TopTable() {
     var topTable = ("<table> <tr> <td><a href=Slots.html>Slots</a> </td> <td>•</td>" +
     " <td> <a href=TicTacToe.html>Tic Tac Toe</a> </td> <td>•</td>" +
     " <td> <a href=Blackjack.html>BlackJack</a> </td> <td>•</td>" +
-    " <td> <a href=Earn_Points.html>Earn Points</a> </td> <td>•</td>" +
+    " <td> <a href=Earn_Points.html>Earn Coins</a> </td> <td>•</td>" +
     " <td><a href=Help.html>Help</a> </td><td></tr> </table> ");
 
     document.getElementById("topTable").innerHTML = topTable;
@@ -619,7 +619,6 @@ function BlackjackDealerCardImg(number) {
 
 
 function Blackjack(hitOrStay) {
-
     if (hitOrStay == "Start") {
 
         var dealerCard1 = RandInt(1, 52);
@@ -650,6 +649,8 @@ function Blackjack(hitOrStay) {
         while (dealerCard7 == dealerCard2 || dealerCard7 == dealerCard3 || dealerCard7 == dealerCard4 || dealerCard7 == dealerCard5 || dealerCard7 == dealerCard6 || dealerCard7 == dealerCard1) {
             dealerCard7 = RandInt(1, 52);
         }
+
+        var dealerStart = dealerCard1 + dealerCard2;
 
         var playerCard1 = RandInt(1, 52);
         var playerCard2 = RandInt(1, 52);
@@ -701,10 +702,9 @@ function Blackjack(hitOrStay) {
         sessionStorage.setItem("playerCard7", playerCard7);
         sessionStorage.setItem("blackjackPlayerValue", blackjackPlayerValue);
         sessionStorage.setItem("hits", 0);
-        sessionStorage.setItem("DealerCardCount", 2)
-    }
-    else if (hitOrStay == "Hit") {
-
+        sessionStorage.setItem("DealerCardCount", 2);
+        sessionStorage.setItem("blackjackDealerValue",dealerStart);
+    } if (hitOrStay == "Hit") {
         var dealerCard1 = parseFloat(sessionStorage.getItem("dealerCard1"));
         var dealerCard2 = parseFloat(sessionStorage.getItem("dealerCard2"));
         var dealerCard3 = parseFloat(sessionStorage.getItem("dealerCard3"));
@@ -722,7 +722,6 @@ function Blackjack(hitOrStay) {
         var hits = parseFloat(sessionStorage.getItem("hits"));
 
         if (hits == 0) {
-
             var blackjackPlayerValue = parseFloat(sessionStorage.getItem("blackjackPlayerValue", blackjackPlayerValue));
 
             var tempPlayerValue = BlackjackCardID(playerCard3, "BlackjackPlayer");
@@ -797,7 +796,7 @@ function Blackjack(hitOrStay) {
             BlackjackCheck();
         }
 
-    } else if (hitOrStay == "Stay") {
+    } if (hitOrStay == "Stay") {
         BlackjackDealerHitOrStay("not");
         BlackjackShowHand();
         BlackjackCheck();
@@ -910,39 +909,39 @@ function BlackjackDealerHitOrStay(number) {
 
     if (number == "not") {
 
-        if (blackjackDealerValue4 <= 17) {
+        if (blackjackDealerValue4 <= 15) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 5);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue4);
-        } else if (blackjackDealerValue3 <= 17) {
+        } else if (blackjackDealerValue3 <= 15) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue3);
             sessionStorage.setItem("DealerCardCount", 4);
-        } else if (blackjackDealerValue2 <= 17) {
+        } else if (blackjackDealerValue2 <= 15) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 3);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue2);
-        } else if (blackjackDealerValue1 <= 17) {
+        } else if (blackjackDealerValue1 <= 15) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 2);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue1);
         } else {
             BlackjackPlayerWin();
         }
-    }else {
-        if (blackjackDealerValue1 <= 17 && hits == 0) {
+    } else {
+        if (blackjackDealerValue1 <= 15 && hits == 0) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 2);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue1);
-        } else if (blackjackDealerValue2 <= 17 && hits == 1) {
+        } else if (blackjackDealerValue2 <= 15 && hits == 1) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue2);
             sessionStorage.setItem("DealerCardCount", 3);
-        } else if (blackjackDealerValue3 <= 17 && hits == 2) {
+        } else if (blackjackDealerValue3 <= 15 && hits == 2) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 4);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue3);
-        } else if (blackjackDealerValue4 <= 17 && hits == 3) {
+        } else if (blackjackDealerValue4 <= 15 && hits == 3) {
             BlackjackDealerCardImg(1);
             sessionStorage.setItem("DealerCardCount", 5);
             sessionStorage.setItem("blackjackDealerValue", blackjackDealerValue4);
@@ -2091,13 +2090,24 @@ function SlotsID(number, output) {
 function EarnScore() {
 
     var earn = sessionStorage.getItem("Earn");
+    var Ans9 = document.getElementById("txt9").value;
 
-    if (earn == "NA"){
-        EarnError("Select a problem");
-    } else if (earn == "State"){
+
+    if (earn == "State"){
         StatesScoreQuiz();
+    }  else if (earn == "Add"){
+        AdditionScoreQuiz();
+    }  else if (earn == "Sub"){
+        SubtractionScoreQuiz();
+    } else if (earn == "Mul"){
+        MultiplicationScoreQuiz();
+    } else if (earn == "Div"){
+        DivisionScoreQuiz();
+    } else if (Ans9 == "Hidden Coins"){
+        GiveCoins(25);
+    } else if (earn == "NA") {
+    EarnError("Select a problem");
     }
-
 
 
 
@@ -2311,8 +2321,12 @@ function StatesScoreQuiz() {
 
     }
 
-    document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
-    GiveCoins(correct);
+    if (correct == 0){
+        document.getElementById("dispEarn").innerHTML = "Sorry You Did Gain Any Coins, Try Again!";
+    } else {
+        document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+        GiveCoins(correct);
+    }
 
     document.getElementById("txt1").value = "";
     document.getElementById("txt2").value = "";
@@ -2394,29 +2408,459 @@ function AddCreateQuiz() {
 
 function AdditionScoreQuiz() {
 
-    var Ans1 = 0;
-    var Ans2 = 0;
-    var Ans3 = 0;
-    var Ans4 = 0;
-    var Ans5 = 0;
-    var Ans6 = 0;
-    var Ans7 = 0;
-    var Ans8 = 0;
-    var Ans9 = 0;
-    var Ans10 = 0;
+    var correct = 0;
+    var Ans1 = document.getElementById("txt1").value;
+    var Ans2 = document.getElementById("txt2").value;
+    var Ans3 = document.getElementById("txt3").value;
+    var Ans4 = document.getElementById("txt4").value;
+    var Ans5 = document.getElementById("txt5").value;
+    var Ans6 = document.getElementById("txt6").value;
+    var Ans7 = document.getElementById("txt7").value;
+    var Ans8 = document.getElementById("txt8").value;
+    var Ans9 = document.getElementById("txt9").value;
+    var Ans10 = document.getElementById("txt10").value;
 
-    document.getElementById("txt1").value = Ans1;
-    document.getElementById("txt2").value = Ans1;
-    document.getElementById("txt3").value = Ans1;
-    document.getElementById("txt4").value = Ans1;
-    document.getElementById("txt5").value = Ans1;
-    document.getElementById("txt6").value = Ans1;
-    document.getElementById("txt7").value = Ans1;
-    document.getElementById("txt8").value = Ans1;
-    document.getElementById("txt9").value = Ans1;
-    document.getElementById("txt10").value = Ans1;
+    if (Ans1 == (ADDITION_PROBLEMS[0] + ADDITION_PROBLEMS[1])) {
+        correct++;
+    } if (Ans2 == (ADDITION_PROBLEMS[2] + ADDITION_PROBLEMS[3])) {
+        correct++;
+    } if (Ans3 == (ADDITION_PROBLEMS[4] + ADDITION_PROBLEMS[5])) {
+        correct++;
+    } if (Ans4 == (ADDITION_PROBLEMS[6] + ADDITION_PROBLEMS[7])) {
+        correct++;
+    } if (Ans5 == (ADDITION_PROBLEMS[8] + ADDITION_PROBLEMS[9])) {
+        correct++;
+    } if (Ans6 == (ADDITION_PROBLEMS[10] + ADDITION_PROBLEMS[11])) {
+        correct++;
+    } if (Ans7 == (ADDITION_PROBLEMS[12] + ADDITION_PROBLEMS[13])) {
+        correct++;
+    } if (Ans8 == (ADDITION_PROBLEMS[14] + ADDITION_PROBLEMS[15])) {
+        correct++;
+    } if (Ans9 == (ADDITION_PROBLEMS[16] + ADDITION_PROBLEMS[17])) {
+        correct++;
+    } if (Ans10 == (ADDITION_PROBLEMS[18] + ADDITION_PROBLEMS[19])) {
+        correct++;
+    }
 
+    if (correct == 0){
+        document.getElementById("dispEarn").innerHTML = "Sorry You Did Gain Any Coins, Try Again!";
+    } else {
+        document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+        GiveCoins(correct);
+    }
 
+    document.getElementById("txt1").value = "";
+    document.getElementById("txt2").value = "";
+    document.getElementById("txt3").value = "";
+    document.getElementById("txt4").value = "";
+    document.getElementById("txt5").value = "";
+    document.getElementById("txt6").value = "";
+    document.getElementById("txt7").value = "";
+    document.getElementById("txt8").value = "";
+    document.getElementById("txt9").value = "";
+    document.getElementById("txt10").value = "";
+
+    document.getElementById("div1").innerHTML = "";
+    document.getElementById("div2").innerHTML = "";
+    document.getElementById("div3").innerHTML = "";
+    document.getElementById("div4").innerHTML = "";
+    document.getElementById("div5").innerHTML = "";
+    document.getElementById("div6").innerHTML = "";
+    document.getElementById("div7").innerHTML = "";
+    document.getElementById("div8").innerHTML = "";
+    document.getElementById("div9").innerHTML = "";
+    document.getElementById("div10").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "NA");
+
+    for (i = 0; i < 20; i++){
+        ADDITION_PROBLEMS.pop;
+    }
 
 
 }
+
+
+//Subtraction
+
+
+var SUBTRACTION_PROBLEMS = [];
+
+function SubCreateQuiz() {
+
+    document.getElementById("dispEarnError").innerHTML = "";
+    document.getElementById("dispEarn").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "Sub");
+
+    for (i = 0; i < 20; i++) {
+        SUBTRACTION_PROBLEMS.pop();
+    }
+
+    var Sub1 = RandInt(50,100);
+    var Sub2 = RandInt(0,50);
+    var Sub3 = RandInt(50,100);
+    var Sub4 = RandInt(0,50);
+    var Sub5 = RandInt(50,100);
+    var Sub6 = RandInt(0,50);
+    var Sub7 = RandInt(50,100);
+    var Sub8 = RandInt(0,50);
+    var Sub9 = RandInt(50,100);
+    var Sub10 = RandInt(0,50);
+    var Sub11 = RandInt(50,100);
+    var Sub12 = RandInt(0,50);
+    var Sub13 = RandInt(50,100);
+    var Sub14 = RandInt(0,50);
+    var Sub15 = RandInt(50,100);
+    var Sub16 = RandInt(0,50);
+    var Sub17 = RandInt(50,100);
+    var Sub18 = RandInt(0,50);
+    var Sub19 = RandInt(50,100);
+    var Sub20 = RandInt(0,50);
+
+    SUBTRACTION_PROBLEMS = [Sub1, Sub2, Sub3, Sub4, Sub5, Sub6, Sub7, Sub8, Sub9, Sub10, Sub11, Sub12, Sub13, Sub14, Sub15, Sub16, Sub17, Sub18, Sub19, Sub20];
+
+    document.getElementById("div1").innerHTML = Sub1 +" - "+Sub2;
+    document.getElementById("div2").innerHTML = Sub3 +" - "+Sub4;
+    document.getElementById("div3").innerHTML = Sub5 +" - "+Sub6;
+    document.getElementById("div4").innerHTML = Sub7 +" - "+Sub8;
+    document.getElementById("div5").innerHTML = Sub9 +" - "+Sub10;
+    document.getElementById("div6").innerHTML = Sub11 +" - "+Sub12;
+    document.getElementById("div7").innerHTML = Sub13 +" - "+Sub14;
+    document.getElementById("div8").innerHTML = Sub15 +" - "+Sub16;
+    document.getElementById("div9").innerHTML = Sub17 +" - "+Sub18;
+    document.getElementById("div10").innerHTML = Sub19 +" - "+Sub20;
+}
+
+
+function SubtractionScoreQuiz() {
+
+    var correct = 0;
+    var Ans1 = document.getElementById("txt1").value;
+    var Ans2 = document.getElementById("txt2").value;
+    var Ans3 = document.getElementById("txt3").value;
+    var Ans4 = document.getElementById("txt4").value;
+    var Ans5 = document.getElementById("txt5").value;
+    var Ans6 = document.getElementById("txt6").value;
+    var Ans7 = document.getElementById("txt7").value;
+    var Ans8 = document.getElementById("txt8").value;
+    var Ans9 = document.getElementById("txt9").value;
+    var Ans10 = document.getElementById("txt10").value;
+
+    
+    if (Ans1 == (SUBTRACTION_PROBLEMS[0] - SUBTRACTION_PROBLEMS[1])) {
+        correct++;
+    } if (Ans2 == (SUBTRACTION_PROBLEMS[2] - SUBTRACTION_PROBLEMS[3])) {
+        correct++;
+    } if (Ans3 == (SUBTRACTION_PROBLEMS[4] - SUBTRACTION_PROBLEMS[5])) {
+        correct++;
+    } if (Ans4 == (SUBTRACTION_PROBLEMS[6] - SUBTRACTION_PROBLEMS[7])) {
+        correct++;
+    } if (Ans5 == (SUBTRACTION_PROBLEMS[8] - SUBTRACTION_PROBLEMS[9])) {
+        correct++;
+    } if (Ans6 == (SUBTRACTION_PROBLEMS[10] - SUBTRACTION_PROBLEMS[11])) {
+        correct++;
+    } if (Ans7 == (SUBTRACTION_PROBLEMS[12] - SUBTRACTION_PROBLEMS[13])) {
+        correct++;
+    } if (Ans8 == (SUBTRACTION_PROBLEMS[14] - SUBTRACTION_PROBLEMS[15])) {
+        correct++;
+    } if (Ans9 == (SUBTRACTION_PROBLEMS[16] - SUBTRACTION_PROBLEMS[17])) {
+        correct++;
+    } if (Ans10 == (SUBTRACTION_PROBLEMS[18] - SUBTRACTION_PROBLEMS[19])) {
+        correct++;
+    }
+
+    if (correct == 0){
+        document.getElementById("dispEarn").innerHTML = "Sorry You Did Gain Any Coins, Try Again!";
+    } else {
+        document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+        GiveCoins(correct);
+    }
+
+    document.getElementById("txt1").value = "";
+    document.getElementById("txt2").value = "";
+    document.getElementById("txt3").value = "";
+    document.getElementById("txt4").value = "";
+    document.getElementById("txt5").value = "";
+    document.getElementById("txt6").value = "";
+    document.getElementById("txt7").value = "";
+    document.getElementById("txt8").value = "";
+    document.getElementById("txt9").value = "";
+    document.getElementById("txt10").value = "";
+
+    document.getElementById("div1").innerHTML = "";
+    document.getElementById("div2").innerHTML = "";
+    document.getElementById("div3").innerHTML = "";
+    document.getElementById("div4").innerHTML = "";
+    document.getElementById("div5").innerHTML = "";
+    document.getElementById("div6").innerHTML = "";
+    document.getElementById("div7").innerHTML = "";
+    document.getElementById("div8").innerHTML = "";
+    document.getElementById("div9").innerHTML = "";
+    document.getElementById("div10").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "NA");
+
+    for (i = 0; i < 20; i++){
+        SUBTRACTION_PROBLEMS.pop;
+    }
+
+
+}
+
+
+//Multiplication
+
+
+var MULTIPLICATION_PROBLEMS = [];
+
+function MulCreateQuiz() {
+
+    document.getElementById("dispEarnError").innerHTML = "";
+    document.getElementById("dispEarn").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "Mul");
+
+    for (i = 0; i < 20; i++) {
+        MULTIPLICATION_PROBLEMS.pop();
+    }
+
+    var Mul1 = RandInt(1,20);
+    var Mul2 = RandInt(1,20);
+    var Mul3 = RandInt(1,20);
+    var Mul4 = RandInt(1,20);
+    var Mul5 = RandInt(1,20);
+    var Mul6 = RandInt(1,20);
+    var Mul7 = RandInt(1,20);
+    var Mul8 = RandInt(1,20);
+    var Mul9 = RandInt(1,20);
+    var Mul10 = RandInt(1,20);
+    var Mul11 = RandInt(1,20);
+    var Mul12 = RandInt(1,20);
+    var Mul13 = RandInt(1,20);
+    var Mul14 = RandInt(1,20);
+    var Mul15 = RandInt(1,20);
+    var Mul16 = RandInt(1,20);
+    var Mul17 = RandInt(1,20);
+    var Mul18 = RandInt(1,20);
+    var Mul19 = RandInt(1,20);
+    var Mul20 = RandInt(1,20);
+
+    MULTIPLICATION_PROBLEMS = [Mul1, Mul2, Mul3, Mul4, Mul5, Mul6, Mul7, Mul8, Mul9, Mul10, Mul11, Mul12, Mul13, Mul14, Mul15, Mul16, Mul17, Mul18, Mul19, Mul20];
+
+    document.getElementById("div1").innerHTML = Mul1 +" * "+Mul2;
+    document.getElementById("div2").innerHTML = Mul3+" * "+Mul4;
+    document.getElementById("div3").innerHTML = Mul5 +" * "+Mul6;
+    document.getElementById("div4").innerHTML = Mul7 +" * "+Mul8;
+    document.getElementById("div5").innerHTML = Mul9 +" * "+Mul10;
+    document.getElementById("div6").innerHTML = Mul11 +" * "+Mul12;
+    document.getElementById("div7").innerHTML = Mul13 +" * "+Mul14;
+    document.getElementById("div8").innerHTML = Mul15 +" * "+Mul16;
+    document.getElementById("div9").innerHTML = Mul17 +" * "+Mul18;
+    document.getElementById("div10").innerHTML = Mul19 +" * "+Mul20;
+}
+
+
+function MultiplicationScoreQuiz() {
+
+    var correct = 0;
+    var Ans1 = document.getElementById("txt1").value;
+    var Ans2 = document.getElementById("txt2").value;
+    var Ans3 = document.getElementById("txt3").value;
+    var Ans4 = document.getElementById("txt4").value;
+    var Ans5 = document.getElementById("txt5").value;
+    var Ans6 = document.getElementById("txt6").value;
+    var Ans7 = document.getElementById("txt7").value;
+    var Ans8 = document.getElementById("txt8").value;
+    var Ans9 = document.getElementById("txt9").value;
+    var Ans10 = document.getElementById("txt10").value;
+
+    if (Ans1 == (MULTIPLICATION_PROBLEMS[0] * MULTIPLICATION_PROBLEMS[1])) {
+        correct++;
+    } if (Ans2 == (MULTIPLICATION_PROBLEMS[2] * MULTIPLICATION_PROBLEMS[3])) {
+        correct++;
+    } if (Ans3 == (MULTIPLICATION_PROBLEMS[4] * MULTIPLICATION_PROBLEMS[5])) {
+        correct++;
+    } if (Ans4 == (MULTIPLICATION_PROBLEMS[6] * MULTIPLICATION_PROBLEMS[7])) {
+        correct++;
+    } if (Ans5 == (MULTIPLICATION_PROBLEMS[8] * MULTIPLICATION_PROBLEMS[9])) {
+        correct++;
+    } if (Ans6 == (MULTIPLICATION_PROBLEMS[10] * MULTIPLICATION_PROBLEMS[11])) {
+        correct++;
+    } if (Ans7 == (MULTIPLICATION_PROBLEMS[12] * MULTIPLICATION_PROBLEMS[13])) {
+        correct++;
+    } if (Ans8 == (MULTIPLICATION_PROBLEMS[14] * MULTIPLICATION_PROBLEMS[15])) {
+        correct++;
+    } if (Ans9 == (MULTIPLICATION_PROBLEMS[16] * MULTIPLICATION_PROBLEMS[17])) {
+        correct++;
+    } if (Ans10 == (MULTIPLICATION_PROBLEMS[18] * MULTIPLICATION_PROBLEMS[19])) {
+        correct++;
+    }
+
+    if (correct == 0){
+        document.getElementById("dispEarn").innerHTML = "Sorry You Did Gain Any Coins, Try Again!";
+    } else {
+        document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+        GiveCoins(correct);
+    }
+
+    document.getElementById("txt1").value = "";
+    document.getElementById("txt2").value = "";
+    document.getElementById("txt3").value = "";
+    document.getElementById("txt4").value = "";
+    document.getElementById("txt5").value = "";
+    document.getElementById("txt6").value = "";
+    document.getElementById("txt7").value = "";
+    document.getElementById("txt8").value = "";
+    document.getElementById("txt9").value = "";
+    document.getElementById("txt10").value = "";
+
+    document.getElementById("div1").innerHTML = "";
+    document.getElementById("div2").innerHTML = "";
+    document.getElementById("div3").innerHTML = "";
+    document.getElementById("div4").innerHTML = "";
+    document.getElementById("div5").innerHTML = "";
+    document.getElementById("div6").innerHTML = "";
+    document.getElementById("div7").innerHTML = "";
+    document.getElementById("div8").innerHTML = "";
+    document.getElementById("div9").innerHTML = "";
+    document.getElementById("div10").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "NA");
+
+    for (i = 0; i < 20; i++){
+        MULTIPLICATION_PROBLEMS.pop;
+    }
+
+
+}
+
+
+
+
+
+//Division
+
+
+var DIVISION_PROBLEMS = [];
+
+function DivCreateQuiz() {
+
+    document.getElementById("dispEarnError").innerHTML = "";
+    document.getElementById("dispEarn").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "Div");
+
+    for (i = 0; i < 20; i++) {
+        DIVISION_PROBLEMS.pop();
+    }
+
+    var Div1 = RandInt(1,20);
+    var Div2 = RandInt(1,20);
+    var Div3 = RandInt(1,20);
+    var Div4 = RandInt(1,20);
+    var Div5 = RandInt(1,20);
+    var Div6 = RandInt(1,20);
+    var Div7 = RandInt(1,20);
+    var Div8 = RandInt(1,20);
+    var Div9 = RandInt(1,20);
+    var Div10 = RandInt(1,20);
+    var Div11 = RandInt(1,20);
+    var Div12 = RandInt(1,20);
+    var Div13 = RandInt(1,20);
+    var Div14 = RandInt(1,20);
+    var Div15 = RandInt(1,20);
+    var Div16 = RandInt(1,20);
+    var Div17 = RandInt(1,20);
+    var Div18 = RandInt(1,20);
+    var Div19 = RandInt(1,20);
+    var Div20 = RandInt(1,20);
+
+    DIVISION_PROBLEMS = [Div1, Div2, Div3, Div4, Div5, Div6, Div7, Div8, Div9, Div10, Div11, Div12, Div13, Div14, Div15, Div16, Div17, Div18, Div19, Div20];
+
+    document.getElementById("div1").innerHTML = (Div1 * Div2) +" / "+Div2;
+    document.getElementById("div2").innerHTML = (Div3 * Div4) +" / "+Div4;
+    document.getElementById("div3").innerHTML = (Div5 * Div6) +" / "+Div6;
+    document.getElementById("div4").innerHTML = (Div7 * Div8) +" / "+Div8;
+    document.getElementById("div5").innerHTML = (Div9 * Div10) +" / "+Div10;
+    document.getElementById("div6").innerHTML = (Div11 * Div12) +" / "+Div12;
+    document.getElementById("div7").innerHTML = (Div13 * Div14) +" / "+Div14;
+    document.getElementById("div8").innerHTML = (Div15 * Div16) +" / "+Div16;
+    document.getElementById("div9").innerHTML = (Div17 * Div18) +" / "+Div18;
+    document.getElementById("div10").innerHTML = (Div19 * Div20) +" / "+Div20;
+}
+
+
+function DivisionScoreQuiz() {
+
+    var correct = 0;
+    var Ans1 = document.getElementById("txt1").value;
+    var Ans2 = document.getElementById("txt2").value;
+    var Ans3 = document.getElementById("txt3").value;
+    var Ans4 = document.getElementById("txt4").value;
+    var Ans5 = document.getElementById("txt5").value;
+    var Ans6 = document.getElementById("txt6").value;
+    var Ans7 = document.getElementById("txt7").value;
+    var Ans8 = document.getElementById("txt8").value;
+    var Ans9 = document.getElementById("txt9").value;
+    var Ans10 = document.getElementById("txt10").value;
+
+    if (Ans1 == (DIVISION_PROBLEMS[0])) {
+        correct++;
+    } if (Ans2 == (DIVISION_PROBLEMS[2])) {
+        correct++;
+    } if (Ans3 == (DIVISION_PROBLEMS[4])) {
+        correct++;
+    } if (Ans4 == (DIVISION_PROBLEMS[6])) {
+        correct++;
+    } if (Ans5 == (DIVISION_PROBLEMS[8])) {
+        correct++;
+    } if (Ans6 == (DIVISION_PROBLEMS[10])) {
+        correct++;
+    } if (Ans7 == (DIVISION_PROBLEMS[12])) {
+        correct++;
+    } if (Ans8 == (DIVISION_PROBLEMS[14])) {
+        correct++;
+    } if (Ans9 == (DIVISION_PROBLEMS[16])) {
+        correct++;
+    } if (Ans10 == (DIVISION_PROBLEMS[18])) {
+        correct++;
+    }
+
+    if (correct == 0){
+        document.getElementById("dispEarn").innerHTML = "Sorry You Did Gain Any Coins, Try Again!";
+    } else {
+    document.getElementById("dispEarn").innerHTML = "You've Earned " + correct + " Coins!";
+    GiveCoins(correct);
+    }
+    document.getElementById("txt1").value = "";
+    document.getElementById("txt2").value = "";
+    document.getElementById("txt3").value = "";
+    document.getElementById("txt4").value = "";
+    document.getElementById("txt5").value = "";
+    document.getElementById("txt6").value = "";
+    document.getElementById("txt7").value = "";
+    document.getElementById("txt8").value = "";
+    document.getElementById("txt9").value = "";
+    document.getElementById("txt10").value = "";
+
+    document.getElementById("div1").innerHTML = "";
+    document.getElementById("div2").innerHTML = "";
+    document.getElementById("div3").innerHTML = "";
+    document.getElementById("div4").innerHTML = "";
+    document.getElementById("div5").innerHTML = "";
+    document.getElementById("div6").innerHTML = "";
+    document.getElementById("div7").innerHTML = "";
+    document.getElementById("div8").innerHTML = "";
+    document.getElementById("div9").innerHTML = "";
+    document.getElementById("div10").innerHTML = "";
+
+    sessionStorage.setItem("Earn", "NA");
+
+    for (i = 0; i < 20; i++){
+        DIVISION_PROBLEMS.pop;
+    }
+
+
+}
+

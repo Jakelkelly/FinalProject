@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="scripts.js" type="text/javascript"></script>
     <meta charset="UTF-8">
-    <title>Earn Points</title>
+    <title>Earn Coins</title>
 </head>
 <body class="Help" onload="startUp();">
 <div id="topTable" class="topTable"></div>
@@ -13,13 +13,14 @@
 
 
 
+<!-- Testing code so I dont have to do my math problems
 <input type="button" onclick="GiveCoins(10)" value="Temp Coins + 10">
 <input type="button" onclick="GivePoints(10)" value="Temp Points + 10">
 <input type="button" onclick="GiveCoins(-10)" value="Temp Coins - 10">
-<input type="button" onclick="GivePoints(-10)" value="Temp Points - 10">
+<input type="button" onclick="GivePoints(-10)" value="Temp Points - 10">-->
 
 
-<h2>Earn Points</h2>
+<h2>Earn Coins</h2>
 
 <table>
     <tr><td><div id = "div1"></div></td>    <td><input type = "text" id = "txt1"></td></tr>
@@ -33,17 +34,17 @@
     <tr><td><div id = "div9"></div></td>    <td><input type = "text" id = "txt9"></td></tr>
     <tr><td><div id = "div10"></div></td>    <td><input type = "text" id = "txt10"></td></tr>
 </table>
-<button id="EarnDone" class="EarnAccept" onclick="EarnScore()">Score</button>
+
 <table>
     <tr>
         <td>
             <button id="EarnButton1" class="EarnButton" onclick="AddCreateQuiz()">Addition</button>
         </td>
         <td>
-            <button id="EarnButton2" class="EarnButton" onclick="SelectTic5()"></button>
+            <button id="EarnButton2" class="EarnButton" onclick="SubCreateQuiz()">Subtraction</button>
         </td>
         <td>
-            <button id="EarnButton3" class="EarnButton" onclick="SelectTic6()"></button>
+            <button id="EarnButton3" class="EarnButton" onclick="MulCreateQuiz()">Multipy</button>
         </td>
         <td>
             <div id="dispEarn"></div>
@@ -51,13 +52,13 @@
     </tr>
     <tr>
         <td>
-            <button id="EarnButton4" class="EarnButton" onclick="SelectTic4()"></button>
+            <button id="EarnButton4" class="EarnButton" onclick="DivCreateQuiz()">Division</button>
         </td>
         <td>
-            <button id="EarnButton5" class="EarnButton" onclick="SelectTic5()"></button>
+            <button id="EarnButton5" class="EarnButton" onclick="StatesCreateQuiz()">States Abbr.</button>
         </td>
         <td>
-            <button id="EarnButton6" class="EarnButton" onclick="StatesCreateQuiz()">States Quiz</button>
+            <button id="EarnButton6" class="EarnButtonSubmit" onclick="EarnScore()">Score<br>Quiz</button>
         </td>
         <td>
             <div id="dispEarnError" class="Errors"></div>
